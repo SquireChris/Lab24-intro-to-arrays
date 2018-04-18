@@ -1,0 +1,144 @@
+/******************************************************************************
+ * AUTHOR     : Chris Burrell & Corey Dickinson
+ * Lab #24    : Introduction to Arrays
+ * CLASS      : CS1A
+ * SECTION    : MW: 8am
+ * DUE DATE   : 04/18/18
+ *****************************************************************************/
+
+#include "functions.h"
+
+/******************************************************************************
+ * Lab #24: Introduction to Arrays
+ * ----------------------------------------------------------------------------
+ * This program will read in a list of 10 names and will return the number of
+ * times that each name was entered in the list.
+ * ----------------------------------------------------------------------------
+ * INPUT:
+ * 		nameAr    : an array that stores each of the names entered
+ * 		name	  : the name the user wants to search for
+ *
+ * OUTPUT:
+ * 		nameCount : the count for the number of names entered
+ *
+ *****************************************************************************/
+
+int main()
+{
+
+	/**************************************************************************
+	 * CONSTANTS
+	 * ------------------------------------------------------------------------
+	 * ARRAY SIZE
+	 * ------------------------------------------------------------------------
+	 * AR_SIZE - DETERMINS THE NUMBER OF NAMES THAT WILL BE STORED
+	 *************************************************************************/
+	const int AR_SIZE = 10;
+
+	string nameAr[AR_SIZE];  // IN   - an array that stores each of the names
+	string name;			 // IN   - the name the user wants to search for
+	int nameCount;			 // CALC - counts the number of names entered
+	int foundName;			 // CALC - counter for number of times a name is
+							 //        found
+
+
+	//OUTPUT - Class heading
+	PrintHeader("Introduction to Arrays", 24, 'L');
+
+	//INPUT - Inputing the names into the array
+	for(nameCount = 0; nameCount < AR_SIZE; nameCount++)
+	{
+	cout << "Enter name #" << nameCount + 1 << ": ";
+	getline(cin, nameAr[nameCount]);
+	}
+
+
+	//INPUT - Prompting the user to input the name they want to search for
+	cout << "\nWho do you want to search for (enter done to exit)? ";
+	getline(cin, name);
+
+
+	//While loop so the user can keep inputing names until they are done.
+	while(name != "done")
+	{
+		//PROCESSING - initializing to zero
+		foundName = 0;
+
+		//PROCESSING - For loop to search through each array for the name
+		for(nameCount = 0; nameCount < AR_SIZE; nameCount++)
+		{
+			//PROCESSING - If statement to increment the found count if the name
+			//		is found in the array.
+			if(nameAr[nameCount] == name)
+			{
+				foundName++;
+			}
+
+		}
+		//OUTPUT - switch statement to output how many of a name is in the list.
+		switch(foundName)
+		{
+		case 0:  cout << name << "\'s name does not exist in this list.\n\n";
+			break;
+		case 1:  cout << "There is one instances of the name " << name << '.';
+				 cout << endl << endl;
+			break;
+		default: cout << "There are " << foundName << " instances of the name ";
+		cout << name << ".\n\n";
+			break;
+		}
+
+		//INPUT - Prompting the user to input the name they want to search for.
+		cout << "Who do you want to search for (enter done to exit)? ";
+		getline(cin, name);
+
+	}// end while
+
+
+	//OUTPUT - End of program message
+	if(name == "done")
+	{
+		cout << "\nThank you for using my program.";
+	}
+
+	return 0;
+}
+
+
+
+
+class header
+
+
+/******************************************************************************
+ * AUTHOR     : Chris Burrell & Corey Dickinson
+ * Lab #24    : Introduction to Arrays
+ * CLASS      : CS1A
+ * SECTION    : MW: 8am
+ * DUE DATE   : 04/18/18
+ *****************************************************************************/
+
+#include "functions.h"
+
+void PrintHeader(string asName, int asNum, char asType)
+{
+	cout << left;
+	cout << "**************************************************\n";
+	cout << "* PROGRAMMED BY : Corey Dickinson & Chris Burrell\n";
+	cout << "* " << setw(14) << "STUDENT ID" << ": 361553 & 1009369\n";
+	cout << "* " << setw(14) <<"CLASS" << ": CS1A - MW - 8AM\n";
+	cout << "* ";
+	// PROCESSING – This will adjust setws and format appropriately
+	// 				based on if this is a lab ‘L’ or assignment
+	if(toupper(asType) == 'L')
+	{
+	cout << "LAB #" << setw(9);
+	}
+	else
+	{
+	cout << "ASSIGNMENT #" << setw(2);
+	}
+	cout << asNum << ": " << asName << endl;
+	cout << "**************************************************\n\n";
+	cout << right;
+}
